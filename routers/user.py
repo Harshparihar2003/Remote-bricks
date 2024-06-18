@@ -46,8 +46,6 @@ async def link_id(link_data: schemas.LinkID):
     if not link_data.linked_id:
         link_data.linked_id = str(uuid.uuid4())
     
-
-
     # Update the user document with the linked ID
     user_collection.update_one(
         {"_id": ObjectId(link_data.user_id)},
@@ -77,7 +75,6 @@ async def add_details(details: schemas.UserDetails):
         {"$set": details_data},
         upsert=True
     )
-    
     return {"message": "Details added/updated successfully"}
 
 @router.get("/user_with_details/{user_id}")
@@ -96,11 +93,9 @@ async def get_user_with_details(user_id: str):
     user_details = details_collection.find_one({"user_id": user_id})
 
     if user_details:
-        # Remove ObjectId fields for better JSON serialization
         user_details["_id"] = str(user_details["_id"])
         user_details["user_id"] = str(user_details["user_id"])
 
-    # Remove ObjectId field for better JSON serialization
     user["_id"] = str(user["_id"])
     if "linked_id" in user:
         user["linked_id"] = str(user["linked_id"])

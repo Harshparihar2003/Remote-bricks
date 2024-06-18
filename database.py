@@ -5,10 +5,10 @@ import ssl
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
 # MongoDB connection
 client = MongoClient("mongodb+srv://harsh9454696030:qLYZYlghHZS0UPzQ@cluster0.d93rs56.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 db = client.mydatabase
-
 
 try:
     client = MongoClient(
